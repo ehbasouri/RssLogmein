@@ -4,14 +4,18 @@ import {
   createNativeStackNavigator,
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
-import {ENTRY, FEED_LIST} from '../consts';
+import {ENTRY, FAVOURITE_LIST, FEED_LIST} from '../consts';
 import FeedList from '../screens/feed/FeedList';
 import Entry from '../screens/entry/Entry';
 import {Feed} from 'feed';
+import Favourite from '../screens/favourite/Favourite';
+
+const NullHeader = () => null;
 
 type FeedListParams = {
   feed_list: any;
   entry: Feed;
+  favourite_list: any;
 };
 
 export type FeedListNavigationProps = NativeStackScreenProps<
@@ -29,13 +33,26 @@ function AppRouter(): JSX.Element {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name={FEED_LIST} component={FeedList} />
         <Stack.Screen
           options={{
-            header: () => null,
+            header: NullHeader,
+          }}
+          name={FEED_LIST}
+          component={FeedList}
+        />
+        <Stack.Screen
+          options={{
+            header: NullHeader,
           }}
           name={ENTRY}
           component={Entry}
+        />
+        <Stack.Screen
+          options={{
+            header: NullHeader,
+          }}
+          name={FAVOURITE_LIST}
+          component={Favourite}
         />
       </Stack.Navigator>
     </NavigationContainer>
