@@ -1,10 +1,13 @@
 import {Feed} from 'feed';
 import {FeedItem, FeedMock, FeedPosts} from '../consts/Feeds';
 
-const feed: Feed = new Feed(FeedMock);
 
 export function createFeed(): Feed {
+  let feed: Feed = new Feed(FeedMock());
+
   FeedPosts.forEach(post => {
+    feed = new Feed(FeedMock());
+
     feed.addItem({
       title: post.title,
       id: post.url,
@@ -15,14 +18,6 @@ export function createFeed(): Feed {
       image: post.image,
       ...FeedItem,
     });
-  });
-
-  feed.addCategory('Technologie');
-
-  feed.addContributor({
-    name: 'Johan Cruyff',
-    email: 'johancruyff@example.com',
-    link: 'https://example.com/johancruyff',
   });
 
   return feed;

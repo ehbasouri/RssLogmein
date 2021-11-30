@@ -1,6 +1,5 @@
 import {Feed} from 'feed';
 import {useEffect, useState} from 'react';
-import {FAVOURITE_LIST} from '../../consts';
 import {createFeed} from '../../lib/feedGenerator';
 import {StorageManager} from '../../lib/storage.service';
 import {useDispatch, useSelector} from 'react-redux';
@@ -19,6 +18,9 @@ export function FeedHooks(): FeedHoosProps {
   const [loading, setLoading] = useState<boolean>(true);
   let mounted = true;
   const dispatch = useDispatch();
+  const favouriteFeeds: Feed[] = useSelector(
+    state => state?.general_reducer?.favouriteFeeds,
+  );
 
   useEffect(() => {
     if (mounted) {
@@ -42,12 +44,11 @@ export function FeedHooks(): FeedHoosProps {
   }
 
   async function getFavouriteList() {
-    const favList = await StorageManager.getValue(FAVOURITE_LIST);
-    console.log('favList: ', favList);
-    if (!!favList) {
+    const favList = await StorageManager.getValue('favouriteFeeds');
+    if (favList) {
       dispatch(
         updateGeneralProps({
-          key: FAVOURITE_LIST,
+          key: 'favouriteFeeds',
           value: favList,
         }),
       );
@@ -55,7 +56,28 @@ export function FeedHooks(): FeedHoosProps {
   }
 
   function addOrRemoveFromFavourites(feed: Feed) {
-    console.log('add or remove : ', feed);
+    let newFavouriteList: Feed[] = [];
+    if (favouriteFeeds?.length === 0) {
+      newFavouriteList = [feed];
+    } else {
+      const result = favouriteFeeds.findIndex(
+        element => element.options.id === feed.options.id,
+      );
+      if (result === -1) {
+        newFavouriteList = [feed, ...favouriteFeeds];
+      } else {
+        newFavouriteList = favouriteFeeds.filter(
+          element => element.options.id !== feed.options.id,
+        );
+      }
+    }
+    dispatch(
+      updateGeneralProps({
+        key: 'favouriteFeeds',
+        value: newFavouriteList,
+      }),
+    );
+    StorageManager.setValue('favouriteFeeds', newFavouriteList);
   }
 
   return {

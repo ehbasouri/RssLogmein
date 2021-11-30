@@ -3,11 +3,11 @@ import {Text, View} from 'react-native';
 import {componentStyles} from './componentStyles';
 
 interface Props {
-  title: string | undefined;
+  title?: string | undefined;
   onBackPress?: () => void;
   showBack?: boolean | undefined;
   onRighButtonPress?: () => void | undefined;
-  rightTitle: string | undefined;
+  rightTitle?: string | undefined;
 }
 
 export function RssHeader({

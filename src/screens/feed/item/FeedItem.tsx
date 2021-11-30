@@ -7,7 +7,7 @@ import moment from 'moment';
 interface Props {
   feed: Feed;
   onPress: () => void;
-  onFavePress: () => void;
+  onFavePress?: () => void;
 }
 
 export function FeedItem({feed, onFavePress, onPress}: Props) {
@@ -21,7 +21,9 @@ export function FeedItem({feed, onFavePress, onPress}: Props) {
       <Text>
         {moment(feed?.options?.updated).subtract(10, 'days').calendar()}
       </Text>
-      <Button title={'fave'} onPress={onFavePress} />
+      {onFavePress && (
+        <Button title={'add To Favourite'} onPress={onFavePress} />
+      )}
     </TouchableOpacity>
   );
 }

@@ -15,10 +15,10 @@ const INITIAL_STATES_GENERAL: INITIAL_STATES_GENERAL_PROPS = {
   favouriteFeeds: [],
 };
 
-export const general_reducer = (
+export function general_reducer(
   state = INITIAL_STATES_GENERAL,
   action: ActionProps,
-) => {
+): INITIAL_STATES_GENERAL_PROPS {
   switch (action.type) {
     case UPDATE_GENERAL_PROPS:
       var newProps = {};
@@ -34,4 +34,4 @@ export const general_reducer = (
     default:
       return state;
   }
-};
+}

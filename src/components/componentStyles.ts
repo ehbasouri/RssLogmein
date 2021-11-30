@@ -12,7 +12,6 @@ export const componentStyles = StyleSheet.create({
   },
   back: {
     color: 'blue',
-    fontWeight: 'bold',
     flex: 1,
   },
   title: {

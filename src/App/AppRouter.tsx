@@ -26,6 +26,10 @@ export type EntryNavigationProps = NativeStackScreenProps<
   FeedListParams,
   'entry'
 >;
+export type FavouriteNavigationProps = NativeStackScreenProps<
+  FeedListParams,
+  'entry'
+>;
 
 const Stack = createNativeStackNavigator();
 
