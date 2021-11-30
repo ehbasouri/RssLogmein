@@ -7,7 +7,7 @@ import {FeedHooks} from './feedHooks';
 import {FeedItem} from './item';
 
 function FeedList({navigation}: FeedListNavigationProps): JSX.Element {
-  const {feeds, loading, addOrRemoveFromFavourites} = FeedHooks();
+  const {feeds, loading, addOrRemoveFromFavourites, favouriteFeeds} = FeedHooks();
 
   function onFeedItemPress(feed: Feed): void {
     navigation.navigate('entry', feed);
@@ -34,9 +34,12 @@ function FeedList({navigation}: FeedListNavigationProps): JSX.Element {
             onFavePress={() => addOrRemoveFromFavourites(item)}
             onPress={() => onFeedItemPress(item)}
             feed={item}
+            favouriteFeeds={favouriteFeeds}
           />
         )}
         keyExtractor={(item, index) => index.toString()}
+        stickyHeaderIndices={[0]}
+        extraData={favouriteFeeds}
       />
     </View>
   );

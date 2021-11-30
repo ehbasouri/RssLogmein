@@ -5,12 +5,14 @@ import {feedStyles} from '../feedStyles';
 import moment from 'moment';
 
 interface Props {
-  feed: Feed;
-  onPress: () => void;
+  feed?: Feed;
+  onPress?: () => void;
   onFavePress?: () => void;
+  isFav?: boolean;
+  favouriteFeeds: Feed[];
 }
 
-export function FeedItem({feed, onFavePress, onPress}: Props) {
+export function FeedItem({feed, onFavePress, onPress, isFav}: Props) {
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -22,7 +24,10 @@ export function FeedItem({feed, onFavePress, onPress}: Props) {
         {moment(feed?.options?.updated).subtract(10, 'days').calendar()}
       </Text>
       {onFavePress && (
-        <Button title={'add To Favourite'} onPress={onFavePress} />
+        <Button
+          title={isFav ? ' remove from Favourite' : 'add To Favourite'}
+          onPress={onFavePress}
+        />
       )}
     </TouchableOpacity>
   );

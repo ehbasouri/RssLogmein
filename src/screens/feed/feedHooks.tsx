@@ -11,6 +11,7 @@ interface FeedHoosProps {
   feeds: Feed[];
   loading: boolean;
   addOrRemoveFromFavourites: (e: Feed) => void;
+  favouriteFeeds: Feed[];
 }
 
 export function FeedHooks(): FeedHoosProps {
@@ -33,13 +34,20 @@ export function FeedHooks(): FeedHoosProps {
     };
   }, []);
 
+  function sortList(array: Feed[]) {
+    const result: Feed[] = array.sort(function (a, b) {
+      return new Date(b.options.updated) - new Date(a.options.updated);
+    });
+    return result;
+  }
+
   async function fetchFeeds() {
     const newFeedList = [];
     for (let index = 0; index < feedCount; index++) {
       const newFeed = createFeed();
       newFeedList.push(newFeed);
     }
-    setFeeds(newFeedList);
+    setFeeds(sortList(newFeedList));
     setLoading(false);
   }
 
@@ -84,5 +92,6 @@ export function FeedHooks(): FeedHoosProps {
     feeds,
     loading,
     addOrRemoveFromFavourites,
+    favouriteFeeds
   };
 }
