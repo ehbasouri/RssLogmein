@@ -2,6 +2,10 @@ import {Feed} from 'feed';
 import {UPDATE_GENERAL_PROPS, RESET_GENERAL_PROPS} from '../../consts';
 import {PayloadProps} from '../actions';
 
+export interface DefaultRootStateProps {
+  general_reducer: INITIAL_STATES_GENERAL_PROPS;
+}
+
 interface INITIAL_STATES_GENERAL_PROPS {
   favouriteFeeds: Feed[];
 }
@@ -11,7 +15,7 @@ interface ActionProps {
   payload: PayloadProps;
 }
 
-const INITIAL_STATES_GENERAL: INITIAL_STATES_GENERAL_PROPS = {
+export const INITIAL_STATES_GENERAL: INITIAL_STATES_GENERAL_PROPS = {
   favouriteFeeds: [],
 };
 

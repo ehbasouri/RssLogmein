@@ -9,7 +9,6 @@ import {FavouriteHooks} from './favouriteHooks';
 function Favourite({navigation}: FavouriteNavigationProps) {
   const {addOrRemoveFromFavourites, favouriteFeeds} = FavouriteHooks();
 
-
   function onBackPress() {
     navigation.goBack();
   }
@@ -28,7 +27,7 @@ function Favourite({navigation}: FavouriteNavigationProps) {
             title={'Favourite List'}
           />
         }
-        data={ favouriteFeeds}
+        data={favouriteFeeds}
         renderItem={({item}) => (
           <FeedItem
             isFav

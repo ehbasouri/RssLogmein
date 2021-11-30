@@ -9,7 +9,7 @@ interface Props {
   onPress?: () => void;
   onFavePress?: () => void;
   isFav?: boolean;
-  favouriteFeeds: Feed[];
+  favouriteFeeds?: Feed[];
 }
 
 export function FeedItem({feed, onFavePress, onPress, isFav}: Props) {

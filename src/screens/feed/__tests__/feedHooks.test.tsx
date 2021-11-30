@@ -1,17 +1,51 @@
 import {renderHook, act} from '@testing-library/react-hooks';
 import {waitFor} from '@testing-library/react-native';
 import {FeedHooks} from '../feedHooks';
+import * as reactRedux from 'react-redux';
 
-test('feedHooks tests', async () => {
-  const {result} = renderHook(() => FeedHooks());
-  expect(result.current.feeds.length).toBe(10);
+// somewhere in your configuration files
+import AsyncStorageMock from '@react-native-async-storage/async-storage/jest/async-storage-mock';
+import {INITIAL_STATES_GENERAL} from '../../../redux/reducer/reducers';
 
-  const newFeed: any = {};
+AsyncStorageMock.multiGet = jest.fn(([keys], callback) => {
+  // do something here to retrieve data
+  callback([]);
+});
 
-  act(() => {
-    result.current.feeds = [newFeed];
+export default AsyncStorageMock;
+
+describe('test suite', () => {
+  const useSelectorMock = jest.spyOn(reactRedux, 'useSelector');
+  const useDispatchMock = jest.spyOn(reactRedux, 'useDispatch');
+  beforeEach(() => {
+    useSelectorMock.mockClear();
+    useDispatchMock.mockClear();
   });
-  await waitFor(() => {
-    expect(result.current.feeds.length).toBe(1);
+
+  test('feedHooks tests', async () => {
+    useSelectorMock.mockReturnValue({...INITIAL_STATES_GENERAL});
+
+    const dummyDispatch = jest.fn();
+    useDispatchMock.mockReturnValue(dummyDispatch);
+    /* SANITY CHECK */
+    expect(dummyDispatch).not.toHaveBeenCalled();
+
+    const {result} = renderHook(() => FeedHooks());
+    expect(result.current.feeds.length).toBe(10);
+
+    const newFeed: any = {};
+
+    act(() => {
+      result.current.feeds = [newFeed];
+    });
+    await waitFor(() => {
+      expect(result.current.feeds.length).toBe(1);
+    });
+    expect(AsyncStorageMock.getItem).toBeCalledWith('favouriteFeeds');
   });
 });
+
+// it('checks if Async Storage is used', async () => {
+//   // await asyncOperationOnAsyncStorage();
+
+// })

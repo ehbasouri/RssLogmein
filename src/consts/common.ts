@@ -1,1 +1,1 @@
-export const FAVOURITE_LIST = 'FAVOURITE_LIST';
+export const FAVOURITE_LIST: string = 'FAVOURITE_LIST';

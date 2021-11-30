@@ -4,6 +4,7 @@ import {createFeed} from '../../lib/feedGenerator';
 import {StorageManager} from '../../lib/storage.service';
 import {useDispatch, useSelector} from 'react-redux';
 import {updateGeneralProps} from '../../redux/actions';
+import {DefaultRootStateProps} from '../../redux/reducer/reducers';
 
 const feedCount = 10;
 
@@ -20,7 +21,7 @@ export function FeedHooks(): FeedHoosProps {
   let mounted = true;
   const dispatch = useDispatch();
   const favouriteFeeds: Feed[] = useSelector(
-    state => state?.general_reducer?.favouriteFeeds,
+    (state: DefaultRootStateProps) => state?.general_reducer?.favouriteFeeds,
   );
 
   useEffect(() => {
@@ -92,6 +93,6 @@ export function FeedHooks(): FeedHoosProps {
     feeds,
     loading,
     addOrRemoveFromFavourites,
-    favouriteFeeds
+    favouriteFeeds,
   };
 }
