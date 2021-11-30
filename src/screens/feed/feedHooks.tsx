@@ -1,4 +1,7 @@
 import {useEffect, useState} from 'react';
+import {createFeed} from '../../lib/feedGenerator';
+
+const feedCount = 10
 
 interface FeedHoosProps {
   feeds: any[];
@@ -22,6 +25,14 @@ export function FeedHooks(): FeedHoosProps {
 
   async function fetchFeeds() {
     //TODO
+    const newFeedList = [];
+    for (let index = 0; index < feedCount; index++) {
+      const newFeed = createFeed();
+      newFeedList.push(newFeed);
+    }
+
+    setFeeds(newFeedList);
+    setLoading(false);
   }
 
   return {

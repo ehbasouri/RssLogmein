@@ -1,10 +1,21 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
+import {Feed} from 'feed';
+import {feedStyles} from '../feedStyles';
+import moment from 'moment';
 
-export function FeedItem() {
+interface Props {
+  feed: Feed;
+}
+
+export function FeedItem({feed}: Props) {
   return (
-    <View>
-      <Text>FeedItem</Text>
-    </View>
+    <TouchableOpacity testID="feed-item" style={feedStyles.feedItemContainer}>
+      <Text testID="feed-title">{feed?.options?.title}</Text>
+      <Text>{feed?.options?.description}</Text>
+      <Text>
+        {moment(feed?.options?.updated).subtract(10, 'days').calendar()}
+      </Text>
+    </TouchableOpacity>
   );
 }
