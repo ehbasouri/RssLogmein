@@ -1,15 +1,16 @@
+import {Feed} from 'feed';
 import {useEffect, useState} from 'react';
 import {createFeed} from '../../lib/feedGenerator';
 
-const feedCount = 10
+const feedCount = 10;
 
 interface FeedHoosProps {
-  feeds: any[];
+  feeds: Feed[];
   loading: boolean;
 }
 
 export function FeedHooks(): FeedHoosProps {
-  const [feeds, setFeeds] = useState<any[]>([]);
+  const [feeds, setFeeds] = useState<Feed[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   let mounted = true;
 
@@ -30,7 +31,6 @@ export function FeedHooks(): FeedHoosProps {
       const newFeed = createFeed();
       newFeedList.push(newFeed);
     }
-
     setFeeds(newFeedList);
     setLoading(false);
   }

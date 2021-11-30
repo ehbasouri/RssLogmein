@@ -6,11 +6,15 @@ import moment from 'moment';
 
 interface Props {
   feed: Feed;
+  onPress: () => void;
 }
 
-export function FeedItem({feed}: Props) {
+export function FeedItem({feed, onPress}: Props) {
   return (
-    <TouchableOpacity testID="feed-item" style={feedStyles.feedItemContainer}>
+    <TouchableOpacity
+      onPress={onPress}
+      testID="feed-item"
+      style={feedStyles.feedItemContainer}>
       <Text testID="feed-title">{feed?.options?.title}</Text>
       <Text>{feed?.options?.description}</Text>
       <Text>

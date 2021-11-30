@@ -1,10 +1,21 @@
+import {Item} from 'feed';
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
+import {entryStyles} from '../entryStyles';
 
-export function EntryItem() {
+interface Props {
+  entry: Item;
+  onPress: () => void;
+}
+
+export function EntryItem({entry, onPress}: Props) {
   return (
-    <View>
-      <Text>EntryItem</Text>
-    </View>
+    <TouchableOpacity
+      onPress={onPress}
+      testID={'entry-item'}
+      style={entryStyles.entryItemContainer}>
+      <Text>{entry?.title}</Text>
+      <Text style={entryStyles.link}>{entry?.link}</Text>
+    </TouchableOpacity>
   );
 }

@@ -23,3 +23,49 @@ export const FeedMock = {
     link: 'https://example.com/johndoe',
   },
 };
+
+export const FeedPosts = [
+  {
+    url: 'https://example.com/posts1',
+    title: 'post1',
+    description: 'description1',
+    content: '',
+    date: new Date(),
+    image: '',
+  },
+  {
+    url: 'https://example.com/posts2',
+    title: 'post1',
+    description: 'description2',
+    content: '',
+    date: new Date(),
+    image: '',
+  },
+];
+
+export const FeedItem = {
+  author: [
+    {
+      name: 'Jane Doe',
+      email: 'janedoe@example.com',
+      link: 'https://example.com/janedoe',
+    },
+    {
+      name: 'Joe Smith',
+      email: 'joesmith@example.com',
+      link: 'https://example.com/joesmith',
+    },
+  ],
+  contributor: [
+    {
+      name: 'Shawn Kemp',
+      email: 'shawnkemp@example.com',
+      link: 'https://example.com/shawnkemp',
+    },
+    {
+      name: 'Reggie Miller',
+      email: 'reggiemiller@example.com',
+      link: 'https://example.com/reggiemiller',
+    },
+  ]
+}
