@@ -5,7 +5,7 @@ import {CustomHooks} from '../customHooks';
 describe('test suite', () => {
   test('feedHooks tests', async () => {
     const {result} = renderHook(() => CustomHooks());
-    expect(result.current.feeds.length).toBe(2);
+    expect(result.current.feeds.length).toBe(3);
 
     act(() => {
       result.current.favouriteFeeds = ['url'];

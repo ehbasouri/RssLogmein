@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`test suite fetch and display data in FeedList 1`] = `
+exports[`test suite Favourite test 1`] = `
 <View>
   <RCTScrollView
     ListHeaderComponent={
