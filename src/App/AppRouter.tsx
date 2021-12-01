@@ -7,14 +7,14 @@ import {
 import {ENTRY, FAVOURITE_LIST, FEED_LIST} from '../consts';
 import FeedList from '../screens/feed/FeedList';
 import Entry from '../screens/entry/Entry';
-import {Feed} from 'feed';
 import Favourite from '../screens/favourite/Favourite';
+import * as rssParser from 'react-native-rss-parser';
 
 const NullHeader = () => null;
 
 type FeedListParams = {
   feed_list: any;
-  entry: Feed;
+  entry: rssParser.Feed;
   favourite_list: any;
 };
 

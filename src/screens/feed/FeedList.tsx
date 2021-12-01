@@ -1,25 +1,29 @@
-import {Feed} from 'feed';
-import React from 'react';
-import {FlatList, Text, View} from 'react-native';
+import React, {useContext} from 'react';
+import {FlatList, View, Text} from 'react-native';
+import {AppContext} from '../../App/AppContext';
 import {FeedListNavigationProps} from '../../App/AppRouter';
 import {RssHeader} from '../../components/RssHeader';
-import {FeedHooks} from './feedHooks';
+import {feedStyles} from './feedStyles';
 import {FeedItem} from './item';
 
 function FeedList({navigation}: FeedListNavigationProps): JSX.Element {
-  const {feeds, loading, addOrRemoveFromFavourites, favouriteFeeds} = FeedHooks();
+  const {feeds, loading, fetchRss, addOrRemoveFromFavourites} =
+    useContext(AppContext);
 
-  function onFeedItemPress(feed: Feed): void {
-    navigation.navigate('entry', feed);
+  function onFeedItemPress(feed: string): void {
+    fetchRss && fetchRss(feed, navigation);
   }
 
   function onRighButtonPress() {
     navigation.navigate('favourite_list');
   }
 
-  return (
+  return loading ? (
+    <View style={feedStyles.loadingContainer}>
+      <Text>loading ...</Text>
+    </View>
+  ) : (
     <View>
-      {loading && <Text testID={'loading'}>loading ...</Text>}
       <FlatList
         ListHeaderComponent={
           <RssHeader
@@ -31,15 +35,16 @@ function FeedList({navigation}: FeedListNavigationProps): JSX.Element {
         data={feeds}
         renderItem={({item}) => (
           <FeedItem
-            onFavePress={() => addOrRemoveFromFavourites(item)}
+            onFavouritePress={() =>
+              addOrRemoveFromFavourites && addOrRemoveFromFavourites(item, true)
+            }
             onPress={() => onFeedItemPress(item)}
             feed={item}
-            favouriteFeeds={favouriteFeeds}
+            favouriteFeeds={[]}
           />
         )}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={item => item}
         stickyHeaderIndices={[0]}
-        extraData={favouriteFeeds}
       />
     </View>
   );

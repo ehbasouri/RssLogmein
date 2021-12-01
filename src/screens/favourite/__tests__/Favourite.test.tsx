@@ -1,27 +1,21 @@
 import React from 'react';
 import {fireEvent, render} from '@testing-library/react-native';
-import Entry from '../Entry';
+import Favourite from '../Favourite';
 import {AppContext} from '../../../App/AppContext';
 
 describe('test suite', () => {
-  test('Entry tests', async () => {
+  test('Favourite test', async () => {
     const props: any = {
+      favouriteFeeds: ['url'],
       navigation: {goBack: jest.fn()},
-      onEntryPress: jest.fn(),
-      route: {
-        params: {
-          title: 'title',
-          items: [{title: 'item-title', links: [{url: 'url'}]}],
-        },
-      },
     };
     const {getByText, toJSON} = render(
       <AppContext.Provider value={props}>
-        <Entry {...props} />
+        <Favourite {...props} />
       </AppContext.Provider>,
     );
-    expect(getByText('title')).toBeTruthy();
-    expect(getByText('item-title')).toBeTruthy();
+    expect(getByText('url')).toBeTruthy();
+    expect(getByText('Favourite List')).toBeTruthy();
     const button = getByText('BACK');
     expect(button).toBeTruthy();
     fireEvent.press(button);

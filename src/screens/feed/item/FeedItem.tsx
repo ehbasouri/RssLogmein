@@ -1,34 +1,33 @@
 import React from 'react';
-import {Button, Text, TouchableOpacity} from 'react-native';
+import {
+  Button,
+  GestureResponderEvent,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import {Feed} from 'feed';
 import {feedStyles} from '../feedStyles';
-import moment from 'moment';
 
 interface Props {
-  feed?: Feed;
+  feed?: string;
   onPress?: () => void;
-  onFavePress?: () => void;
+  onFavouritePress?: (e: GestureResponderEvent) => void;
   isFav?: boolean;
   favouriteFeeds?: Feed[];
 }
 
-export function FeedItem({feed, onFavePress, onPress, isFav}: Props) {
+export function FeedItem({feed, onFavouritePress, onPress, isFav}: Props) {
   return (
     <TouchableOpacity
       onPress={onPress}
       testID="feed-item"
       style={feedStyles.feedItemContainer}>
-      <Text testID="feed-title">{feed?.options?.title}</Text>
-      <Text>{feed?.options?.description}</Text>
-      <Text>
-        {moment(feed?.options?.updated).subtract(10, 'days').calendar()}
-      </Text>
-      {onFavePress && (
-        <Button
-          title={isFav ? ' remove from Favourite' : 'add To Favourite'}
-          onPress={onFavePress}
-        />
-      )}
+      <Text testID="feed-title">{feed}</Text>
+      <Button
+        title={isFav ? 'remove from Favourite' : 'add To Favourite'}
+        onPress={onFavouritePress}
+        testID={'favourite-button'}
+      />
     </TouchableOpacity>
   );
 }

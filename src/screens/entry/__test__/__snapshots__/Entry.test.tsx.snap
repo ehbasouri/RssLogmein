@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test suite fetch and display data in FeedList 1`] = `
+<View>
+  <RCTScrollView
+    ListHeaderComponent={
+      <RssHeader
+        onBackPress={[Function]}
+        showBack={true}
+        title="title"
+      />
+    }
+    data={
+      Array [
+        Object {
+          "links": Array [
+            Object {
+              "url": "url",
+            },
+          ],
+          "title": "item-title",
+        },
+      ]
+    }
+    getItem={[Function]}
+    getItemCount={[Function]}
+    keyExtractor={[Function]}
+    onContentSizeChange={[Function]}
+    onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={
+      Array [
+        0,
+      ]
+    }
+    viewabilityConfigCallbackPairs={Array []}
+  >
+    <View>
+      <View
+        onLayout={[Function]}
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#fff",
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "paddingBottom": 16,
+              "paddingHorizontal": 6,
+              "paddingTop": 50,
+            }
+          }
+        >
+          <Text
+            onPress={[Function]}
+            style={
+              Object {
+                "color": "blue",
+                "flex": 1,
+              }
+            }
+          >
+            BACK
+          </Text>
+          <Text
+            style={
+              Object {
+                "flex": 4,
+                "fontSize": 18,
+                "fontWeight": "bold",
+                "width": 40,
+              }
+            }
+          >
+            title
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "blue",
+                "flex": 1,
+              }
+            }
+          />
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          style={
+            Object {
+              "backgroundColor": "#fff",
+              "borderColor": "#C1C1C1",
+              "borderWidth": 0.5,
+              "marginTop": 20,
+              "padding": 20,
+            }
+          }
+        >
+          <Text>
+            item-title
+          </Text>
+          <Text
+            onPress={[Function]}
+            style={
+              Object {
+                "color": "blue",
+              }
+            }
+            testID="entry-item"
+          >
+            url
+          </Text>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;

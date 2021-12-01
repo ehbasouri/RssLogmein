@@ -1,27 +1,25 @@
 import React from 'react';
-import {render} from '@testing-library/react-native';
+import {fireEvent, render} from '@testing-library/react-native';
 import FeedList from '../FeedList';
-import * as reactRedux from 'react-redux';
-import {INITIAL_STATES_GENERAL} from '../../../redux/reducer/reducers';
+import {AppContext} from '../../../App/AppContext';
 
 describe('test suite', () => {
-  const useSelectorMock = jest.spyOn(reactRedux, 'useSelector');
-  const useDispatchMock = jest.spyOn(reactRedux, 'useDispatch');
-  beforeEach(() => {
-    useSelectorMock.mockClear();
-    useDispatchMock.mockClear();
-  });
-
-  test('fetch and display data in FeedList', async () => {
-    useSelectorMock.mockReturnValue({...INITIAL_STATES_GENERAL});
-
-    const dummyDispatch = jest.fn();
-    useDispatchMock.mockReturnValue(dummyDispatch);
-    /* SANITY CHECK */
-    expect(dummyDispatch).not.toHaveBeenCalled();
-
-    const props: any = {};
-    const {toJSON} = render(<FeedList {...props} />);
-    // expect(toJSON()).toMatchSnapshot();
+  test('FeedList tests', async () => {
+    const props: any = {
+      feeds: ['url'],
+      navigation: {navigate: jest.fn()},
+    };
+    const {getByText, toJSON} = render(
+      <AppContext.Provider value={props}>
+        <FeedList {...props} />
+      </AppContext.Provider>,
+    );
+    expect(getByText('url')).toBeTruthy();
+    expect(getByText('Feed List')).toBeTruthy();
+    const button = getByText('Favourite');
+    expect(button).toBeTruthy();
+    fireEvent.press(button);
+    expect(props.navigation.navigate).toHaveBeenCalled();
+    expect(toJSON()).toMatchSnapshot();
   });
 });

@@ -1,13 +1,13 @@
 import React from 'react';
 import AppRouter from './AppRouter';
-import {createStore} from 'redux';
-import {Provider} from 'react-redux';
-import reducers from '../redux/reducer';
+import {CustomHooks} from './customHooks';
+import {AppContextProvider} from './AppContext';
 
 export default function App(): JSX.Element {
+  const appcontext = CustomHooks();
   return (
-    <Provider store={createStore(reducers, {})}>
+    <AppContextProvider value={appcontext}>
       <AppRouter />
-    </Provider>
+    </AppContextProvider>
   );
 }

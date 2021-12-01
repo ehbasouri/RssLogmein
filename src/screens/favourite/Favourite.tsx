@@ -1,20 +1,20 @@
-import {Feed} from 'feed';
-import React from 'react';
+import React, {useContext} from 'react';
 import {FlatList, View} from 'react-native';
+import {AppContext} from '../../App/AppContext';
 import {FavouriteNavigationProps} from '../../App/AppRouter';
 import {RssHeader} from '../../components/RssHeader';
 import {FeedItem} from '../feed/item';
-import {FavouriteHooks} from './favouriteHooks';
 
 function Favourite({navigation}: FavouriteNavigationProps) {
-  const {addOrRemoveFromFavourites, favouriteFeeds} = FavouriteHooks();
+  const {addOrRemoveFromFavourites, favouriteFeeds, fetchRss} =
+    useContext(AppContext);
 
   function onBackPress() {
     navigation.goBack();
   }
 
-  function onFeedItemPress(feed: Feed): void {
-    navigation.navigate('entry', feed);
+  function onFeedItemPress(feed: string): void {
+    fetchRss && fetchRss(feed, navigation);
   }
 
   return (
@@ -31,7 +31,10 @@ function Favourite({navigation}: FavouriteNavigationProps) {
         renderItem={({item}) => (
           <FeedItem
             isFav
-            onFavePress={() => addOrRemoveFromFavourites(item)}
+            onFavouritePress={() =>
+              addOrRemoveFromFavourites &&
+              addOrRemoveFromFavourites(item, false)
+            }
             onPress={() => onFeedItemPress(item)}
             feed={item}
           />

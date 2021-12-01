@@ -8,4 +8,9 @@ export const feedStyles = StyleSheet.create({
     marginTop: 20,
     backgroundColor: '#fff',
   },
+  loadingContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
 });

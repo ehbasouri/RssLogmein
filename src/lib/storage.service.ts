@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-async function getValue(key: string) {
+async function getValue(key: string): Promise<any> {
   const value: any = await AsyncStorage.getItem(key);
   try {
     const parsedValue = JSON.parse(value);
@@ -10,7 +10,7 @@ async function getValue(key: string) {
   }
 }
 
-function setValue(key: string, value: string | object) {
+function setValue(key: string, value: string | object): any {
   var validValue: any = value;
   if (typeof value !== 'string') {
     validValue = JSON.stringify(value);

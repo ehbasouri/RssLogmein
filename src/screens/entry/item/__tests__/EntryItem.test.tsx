@@ -3,11 +3,17 @@ import React from 'react';
 import {EntryItem} from '..';
 
 describe('EntryItem tests', () => {
-  it('Header test', () => {
+  it('EntryItem test', () => {
     let props: any = {
       onPress: jest.fn(),
+      entry: {
+        title: 'title',
+        links: [{url: 'url'}],
+      }
     };
-    const {toJSON, getByTestId} = render(<EntryItem {...props} />);
+    const {toJSON, getByTestId, getByText} = render(<EntryItem {...props} />);
+    expect(getByText('title')).toBeTruthy();
+    expect(getByText('url')).toBeTruthy();
 
     const item = getByTestId('entry-item');
     fireEvent.press(item);
