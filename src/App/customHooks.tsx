@@ -43,20 +43,22 @@ export function CustomHooks(): AppContextType {
     }
   }
 
-  function addOrRemoveFromFavourites(feed: string, add: boolean) {
-    let newFavouriteList: string[] = [];
+  function checkInFavoriteFeeds(feed: string, isAddAction: boolean): string[] {
     if (favouriteFeeds?.length === 0) {
-      newFavouriteList = [feed];
-    } else {
-      const result = favouriteFeeds.includes(feed);
-      if (!result) {
-        newFavouriteList = [feed, ...favouriteFeeds];
-      } else if (!add) {
-        newFavouriteList = favouriteFeeds.filter(element => element !== feed);
-      } else {
-        newFavouriteList = favouriteFeeds;
-      }
+      return [feed];
     }
+    const result = favouriteFeeds.includes(feed);
+    if (!result) {
+      return [feed, ...favouriteFeeds];
+    }
+    if (!isAddAction) {
+      return favouriteFeeds.filter(element => element !== feed);
+    }
+    return favouriteFeeds;
+  }
+
+  function addOrRemoveFromFavourites(feed: string, add: boolean) {
+    const newFavouriteList = checkInFavoriteFeeds(feed, add);
     setFavouriteFeeds(newFavouriteList);
     StorageManager.setValue('favouriteFeeds', newFavouriteList);
   }

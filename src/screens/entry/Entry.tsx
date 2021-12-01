@@ -5,7 +5,10 @@ import {EntryNavigationProps} from '../../App/AppRouter';
 import {RssHeader} from '../../components/RssHeader';
 import {EntryItem} from './item';
 
-export default function Entry({navigation, route}: EntryNavigationProps) {
+export default function Entry({
+  navigation,
+  route,
+}: EntryNavigationProps): JSX.Element {
   const {onEntryPress} = useContext(AppContext);
   const {items, title} = route.params;
   function onBackPress() {
@@ -13,7 +16,7 @@ export default function Entry({navigation, route}: EntryNavigationProps) {
   }
 
   return (
-    <View>
+    <View testID={'entry-screen'}>
       <FlatList
         ListHeaderComponent={
           <RssHeader showBack onBackPress={onBackPress} title={title} />

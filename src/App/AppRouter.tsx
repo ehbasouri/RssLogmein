@@ -33,32 +33,38 @@ export type FavouriteNavigationProps = NativeStackScreenProps<
 
 const Stack = createNativeStackNavigator();
 
+export function AppStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        options={{
+          header: NullHeader,
+        }}
+        name={FEED_LIST}
+        component={FeedList}
+      />
+      <Stack.Screen
+        options={{
+          header: NullHeader,
+        }}
+        name={ENTRY}
+        component={Entry}
+      />
+      <Stack.Screen
+        options={{
+          header: NullHeader,
+        }}
+        name={FAVOURITE_LIST}
+        component={Favourite}
+      />
+    </Stack.Navigator>
+  );
+}
+
 function AppRouter(): JSX.Element {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          options={{
-            header: NullHeader,
-          }}
-          name={FEED_LIST}
-          component={FeedList}
-        />
-        <Stack.Screen
-          options={{
-            header: NullHeader,
-          }}
-          name={ENTRY}
-          component={Entry}
-        />
-        <Stack.Screen
-          options={{
-            header: NullHeader,
-          }}
-          name={FAVOURITE_LIST}
-          component={Favourite}
-        />
-      </Stack.Navigator>
+      <AppStack />
     </NavigationContainer>
   );
 }

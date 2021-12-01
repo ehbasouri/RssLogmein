@@ -60,7 +60,8 @@
       "node"
     ],
     "setupFiles": [
-      "./jest/asyncStorage.ts"
+      "./jest/asyncStorage.ts",
+      "./jest/setup.ts"
     ]
   }
 }
